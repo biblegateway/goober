@@ -11,13 +11,7 @@ function css(val) {
     let _val = val.call ? val(ctx.p) : val;
 
     return hash(
-        _val.unshift
-            ? _val.raw
-                ? // Tagged templates
-                  compile(_val, [].slice.call(arguments, 1), ctx.p)
-                : // Regular arrays
-                  _val.reduce((o, i) => (i ? Object.assign(o, i.call ? i(ctx.p) : i) : o), {})
-            : _val,
+        _val.unshift ? compile(_val, [].slice.call(arguments, 1), ctx.p) : _val,
         getSheet(ctx.target),
         ctx.g,
         ctx.o,
